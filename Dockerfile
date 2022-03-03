@@ -11,7 +11,7 @@ RUN yarn install
 COPY . .
 
 RUN yarn build
-RUN yarn install --production=true
+RUN install --production=true
 
 FROM node:16-alpine as deploy
 WORKDIR /app
