@@ -2,4 +2,4 @@ FROM node:16
 
 WORKDIR /app
 
-ENTRYPOINT yarn start:dev
+ENTRYPOINT ["yarn", "start:dev"]

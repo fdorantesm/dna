@@ -24,8 +24,7 @@
     "dev:start": "/bin/bash scripts/compose.sh up",
     "dev:stop": "/bin/bash scripts/compose.sh down",
     "make": "/bin/bash scripts/make.sh",
-    "husky:install": "husky install",
-    "postinstall": "npm-run-all husky:install"
+    "husky:install": "husky install"
   },
   "dependencies": {
     "@nestjs/common": "^8.0.0",
