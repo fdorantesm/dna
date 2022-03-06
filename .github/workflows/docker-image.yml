@@ -12,4 +12,8 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: Build the Docker image
+      env:
+        DNA_CHARS: ${{ secrets.DNA_CHARS }}
+        DNA_MUTATION_THRESHOLD_CHARS_COUNT: ${{ secrets.DNA_MUTATION_THRESHOLD_CHARS_COUNT }}
+        DNA_MUTATION_THRESHOLD_SEQUENCE_LENGTH: ${{ secrets.DNA_MUTATION_THRESHOLD_SEQUENCE_LENGTH }}
       run: docker build . --file Dockerfile --tag guros/dna:$(date +%s)

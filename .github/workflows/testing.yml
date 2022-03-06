@@ -21,6 +21,10 @@ jobs:
         uses: actions/setup-node@v2
         with:
           node-version: ${{ matrix.node-version }}
+        env:
+          DNA_CHARS: ${{ secrets.DNA_CHARS }}
+          DNA_MUTATION_THRESHOLD_CHARS_COUNT: ${{ secrets.DNA_MUTATION_THRESHOLD_CHARS_COUNT }}
+          DNA_MUTATION_THRESHOLD_SEQUENCE_LENGTH: ${{ secrets.DNA_MUTATION_THRESHOLD_SEQUENCE_LENGTH }}
       - name: Testing
         run: yarn install
       - run: yarn build
