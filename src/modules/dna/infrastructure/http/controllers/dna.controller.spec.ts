@@ -1,6 +1,5 @@
 import { ConfigModule } from '@nestjs/config';
 import { Test, TestingModule } from '@nestjs/testing';
-import { ForbiddenException } from '@nestjs/common';
 
 import { dnaConfig } from '../../../application/config/dna.config';
 import { DnaService } from '../../../domain/services/dna.service';

@@ -4,8 +4,10 @@ import {
   ForbiddenException,
   Get,
   Post,
+  UseGuards,
 } from '@nestjs/common';
 
+import { BearerAuthGuard } from '../../../../../auth/infraestructure/passport/guards/bearer.guard';
 import { Json } from '../../../../../app/types/json.type';
 import { DnaApplicationService } from '../../../application/services/dna.application.service';
 import { CreateDnaDto } from '../dtos/create-dna.dto';
@@ -17,6 +19,7 @@ import { CreateDnaDto } from '../dtos/create-dna.dto';
 export class DnaController {
   constructor(private readonly dnaApplicationService: DnaApplicationService) {}
 
+  @UseGuards(BearerAuthGuard)
   @Post('/mutations')
   public lookupDna(@Body() body: CreateDnaDto) {
     try {
