@@ -24,3 +24,26 @@ yarn dev:start up
 ```sh
 yarn x yarn add <module>
 ```
+
+### Sandbox
+
+|         |                                 |
+| ------- | ------------------------------- |
+| API Key | 311SXD9-47T4XC9-JB5XZ88-82WCWWW |
+
+```sh
+curl --request POST \
+  --url http://localhost:3000/v1/dna/mutations \
+  --header 'Authorization: Api-Key 311SXD9-47T4XC9-JB5XZ88-82WCWWW' \
+  --header 'Content-Type: application/json' \
+  --data '{
+	"dna": [
+		"ATGTGA",
+		"CATTGC",
+		"TTATGT",
+		"TGAAGG",
+		"CCCCTA",
+		"TCACTG"
+	]
+}'
+```
