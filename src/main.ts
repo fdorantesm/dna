@@ -4,7 +4,7 @@ import { Logger, ValidationPipe } from '@nestjs/common';
 import * as volleyball from 'volleyball';
 
 import { AppModule } from './app/app.module';
-import { ServerConfiguration } from './app/config/types/server.type';
+import { ServerConfiguration } from './core/config/server/server.type';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);

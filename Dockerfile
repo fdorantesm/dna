@@ -11,7 +11,7 @@ RUN yarn install
 COPY . .
 
 RUN yarn build
-RUN install --production=true
+RUN yarn install --production=true
 
 FROM node:16-alpine as deploy
 WORKDIR /app
@@ -19,4 +19,4 @@ WORKDIR /app
 COPY --from=build /src/build/dist/main.js index.js
 COPY --from=build /src/build/node_modules node_modules
 
-ENTRYPOINT node .
+ENTRYPOINT ["node", "."]

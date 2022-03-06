@@ -1,4 +1,4 @@
-import { Controller, Get, VERSION_NEUTRAL } from '@nestjs/common';
+import { Controller, Get, HttpCode, VERSION_NEUTRAL } from '@nestjs/common';
 
 import { HealthService } from '../../application/services/health.service';
 
@@ -10,6 +10,7 @@ export class HealthController {
   constructor(private readonly healthService: HealthService) {}
 
   @Get('/')
+  @HttpCode(204)
   public health(): void {
     return this.healthService.health();
   }
