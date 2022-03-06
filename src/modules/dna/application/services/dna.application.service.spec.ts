@@ -3,7 +3,7 @@ import { Test, TestingModule } from '@nestjs/testing';
 
 import { DnaServiceHelper } from '../../domain/helpers/dna.helper';
 import { DnaService } from '../../domain/services/dna.service';
-import dnaLoader from '../config/dna.loader';
+import dnaLoader from '../config/dna.config';
 import { DnaApplicationService } from './dna.application.service';
 
 describe('DnaApplicationService', () => {

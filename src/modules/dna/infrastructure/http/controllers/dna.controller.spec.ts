@@ -2,7 +2,7 @@ import { ConfigModule } from '@nestjs/config';
 import { Test, TestingModule } from '@nestjs/testing';
 import { ForbiddenException } from '@nestjs/common';
 
-import dnaLoader from '../../../application/config/dna.loader';
+import dnaLoader from '../../../application/config/dna.config';
 import { DnaService } from '../../../domain/services/dna.service';
 import { DnaApplicationService } from '../../../application/services/dna.application.service';
 import { DnaServiceHelper } from '../../../domain/helpers/dna.helper';

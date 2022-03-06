@@ -1,15 +1,18 @@
 import { ConfigModuleOptions } from '@nestjs/config';
 import * as Joi from 'joi';
 
-import { configLoader } from './loader';
-import configSchema from './schemas/config.schema';
 import dnaSchema from '../../modules/dna/application/config/dna.schema';
+import serverSchema from './server/server.schema';
+import serverConfig from './server/config';
+import databaseSchema from './database/database.schema';
 
 export const configOptions: ConfigModuleOptions = {
   cache: true,
-  load: [configLoader],
+  isGlobal: true,
+  load: [serverConfig],
   validationSchema: Object.assign(Joi.object(), {
-    ...configSchema,
+    ...databaseSchema,
+    ...serverSchema,
     ...dnaSchema,
   }),
   validationOptions: {

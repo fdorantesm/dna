@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 
-import dnaConfig from './application/config/dna.loader';
+import dnaConfig from './application/config/dna.config';
 import { DnaApplicationService } from './application/services/dna.application.service';
 import { DnaServiceHelper } from './domain/helpers/dna.helper';
 import { DnaService } from './domain/services/dna.service';

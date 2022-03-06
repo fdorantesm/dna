@@ -1,4 +1,6 @@
 import { Injectable } from '@nestjs/common';
+import { Json } from 'src/app/types/json.type';
+
 import { DnaService } from '../../domain/services/dna.service';
 
 @Injectable()
@@ -27,7 +29,7 @@ export class DnaApplicationService {
     return mutations;
   }
 
-  public getStats() {
+  public getStats(): Json {
     return this.dnaService.stats();
   }
 }

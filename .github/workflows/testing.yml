@@ -4,7 +4,7 @@ on:
   push:
     branches: [ release/**, hotfix/**, bugfix/**, feature/**  ]
   pull_request:
-    branches: [ main, develop ]
+    branches: [ main, develop, hotfix/**, bugfix/**, feature/** ]
 
 jobs:
   build:
@@ -23,7 +23,7 @@ jobs:
           node-version: ${{ matrix.node-version }}
       - name: Build
         run: yarn install
-        run: yarn build
+      - run: yarn build
       - name: Lint
         run: yarn lint
       - name: Test
