@@ -18,9 +18,9 @@ export class DnaController {
   constructor(private readonly dnaApplicationService: DnaApplicationService) {}
 
   @Post('/mutations')
-  public createDnaMutation(@Body() body: CreateDnaDto) {
+  public lookupDna(@Body() body: CreateDnaDto) {
     try {
-      return this.dnaApplicationService.createDnaMutation(body.dna);
+      return this.dnaApplicationService.lookupDna(body.dna);
     } catch (error) {
       throw new ForbiddenException(error.message);
     }

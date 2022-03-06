@@ -33,9 +33,9 @@ describe('DnaApplicationService', () => {
     expect(service).toBeDefined();
   });
 
-  it('should mutations if were more than 2', () => {
+  it('should mutations if were more than 2', async () => {
     try {
-      const task = service.createDnaMutation([
+      const task = await service.lookupDna([
         'ATGTGA',
         'CATTGC',
         'TTATGT',
@@ -47,5 +47,15 @@ describe('DnaApplicationService', () => {
     } catch (error) {
       console.log(error);
     }
+  });
+
+  it('should returns stats with 0.4 ratio', async () => {
+    try {
+      expect(await service.getStats()).toEqual({
+        count_mutations: 40,
+        count_no_mutation: 100,
+        ratio: 0.4,
+      });
+    } catch {}
   });
 });
