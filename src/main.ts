@@ -18,7 +18,7 @@ async function bootstrap() {
   app.enableVersioning();
   app.use(volleyball);
 
-  app.listen(port, host, () => {
+  app.listen(port || process.env.PORT, host, () => {
     Logger.log(`Server ready on http://${host}:${port}`, 'Application');
   });
 }
