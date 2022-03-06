@@ -1,8 +1,11 @@
 import { Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
-import { Json } from 'src/app/types/json.type';
-import { DnaConfigType } from '../../application/config/dna.type';
 
+import { Json } from '../../../../app/types/json.type';
+import { DnaConfigType } from '../../application/config/dna.type';
+import { CreateDnaDto } from '../../infrastructure/database/dtos/create-dna.dto';
+import { DnaRepository } from '../../infrastructure/database/repositories/dna.repository';
+import { DnaEntity } from '../entities/dna.entity';
 import { DnaServiceHelper } from '../helpers/dna.helper';
 
 @Injectable()
@@ -10,9 +13,14 @@ export class DnaService {
   constructor(
     private readonly dnaServiceHelper: DnaServiceHelper,
     private readonly configService: ConfigService,
+    private readonly dnaRepository: DnaRepository,
   ) {}
 
-  public findMutations(dna: string[]) {
+  public createDna(dna: CreateDnaDto): Promise<DnaEntity> {
+    return this.dnaRepository.create(dna);
+  }
+
+  public lookupMutations(dna: string[]) {
     this.isValidTable(dna);
     const config = this.configService.get<DnaConfigType>('dna');
 

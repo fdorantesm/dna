@@ -6,13 +6,12 @@ import {
 } from '@nestjs/mongoose';
 import { ConnectionString } from 'connection-string';
 import * as mongoose from 'mongoose';
-import * as mongoosePaginate from 'mongoose-paginate';
-import { Json } from 'src/app/types/json.type';
-import { ServerApiVersion } from 'mongodb';
 import { mongooseHideObjectId } from '@plugins/mongoose-hide-object-id';
+import * as mongoosePaginate from 'mongoose-paginate';
 
+import { Json } from '../../../app/types/json.type';
 import { DatabaseConfiguration } from './database.type';
-import { DatabaseMechanism } from './enums/mechanism.enum';
+import { AuthMechanism } from 'mongodb';
 
 @Injectable()
 export class DatabaseFactory implements MongooseOptionsFactory {
@@ -30,13 +29,24 @@ export class DatabaseFactory implements MongooseOptionsFactory {
       params: {},
     };
 
-    if (this.config.auth.mechanism === DatabaseMechanism.X509) {
+    if (this.config.auth.mechanism === AuthMechanism.MONGODB_X509) {
       const cert = `${process.cwd()}/mongodb.pem`;
       mongodbOptions.sslKey = cert;
       mongodbOptions.sslCert = cert;
-      mongodbOptions.serverApi = ServerApiVersion.v1;
+      mongodbOptions.authMechanism = this.config.auth.mechanism;
       uriConfig.params.authSource = '$external';
-      uriConfig.params.authMechanism = DatabaseMechanism.X509;
+      uriConfig.params.authMechanism = AuthMechanism.MONGODB_X509;
+    }
+
+    if (
+      this.config.auth.mechanism === AuthMechanism.MONGODB_SCRAM_SHA1 ||
+      this.config.auth.mechanism === AuthMechanism.MONGODB_SCRAM_SHA256 ||
+      this.config.auth.mechanism === AuthMechanism.MONGODB_PLAIN ||
+      this.config.auth.mechanism === AuthMechanism.MONGODB_DEFAULT
+    ) {
+      uriConfig.user = this.config.auth.username;
+      uriConfig.password = this.config.auth.password;
+      mongodbOptions.authMechanism = this.config.auth.mechanism;
     }
 
     const uri = new ConnectionString('', uriConfig).toString();
@@ -44,7 +54,6 @@ export class DatabaseFactory implements MongooseOptionsFactory {
     return {
       uri,
       dbName: this.config.database,
-      authMechanism: this.config.auth.mechanism,
       useNewUrlParser: true,
       useUnifiedTopology: true,
       ...mongodbOptions,

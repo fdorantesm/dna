@@ -5,8 +5,8 @@ import {
   Get,
   Post,
 } from '@nestjs/common';
-import { Json } from 'src/app/types/json.type';
 
+import { Json } from '../../../../../app/types/json.type';
 import { DnaApplicationService } from '../../../application/services/dna.application.service';
 import { CreateDnaDto } from '../dtos/create-dna.dto';
 

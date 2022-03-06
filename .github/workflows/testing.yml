@@ -9,6 +9,7 @@ on:
 jobs:
   build:
 
+    environment: testing
     runs-on: ubuntu-latest
 
     strategy:
@@ -27,8 +28,13 @@ jobs:
       - name: Lint
         run: yarn lint
       - name: Test
-        run: yarn test
         env:
-          DNA_CHARS: ${{ env.DNA_CHARS }}
-          DNA_MUTATION_THRESHOLD_CHARS_COUNT: ${{ env.DNA_MUTATION_THRESHOLD_CHARS_COUNT }}
-          DNA_MUTATION_THRESHOLD_SEQUENCE_LENGTH: ${{ env.DNA_MUTATION_THRESHOLD_SEQUENCE_LENGTH }}
+          DNA_CHARS: ${{ secrets.DNA_CHARS }}
+          DNA_MUTATION_THRESHOLD_CHARS_COUNT: ${{ secrets.DNA_MUTATION_THRESHOLD_CHARS_COUNT }}
+          DNA_MUTATION_THRESHOLD_SEQUENCE_LENGTH: ${{ secrets.DNA_MUTATION_THRESHOLD_SEQUENCE_LENGTH }}
+          DB_HOST: ${{ secrets.DB_HOST }}
+          DB_USERNAME: ${{ secrets.DB_USERNAME }}
+          DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
+          DB_AUTH_MECHANISM: ${{ secrets.DB_AUTH_MECHANISM }}
+          DB_DATABASE: ${{ secrets.DB_DATABASE }}
+        run: yarn test

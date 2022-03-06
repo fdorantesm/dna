@@ -3,7 +3,9 @@ import { Test, TestingModule } from '@nestjs/testing';
 
 import { DnaServiceHelper } from '../../domain/helpers/dna.helper';
 import { DnaService } from '../../domain/services/dna.service';
-import dnaLoader from '../config/dna.config';
+import { DnaFakeModel } from '../../infrastructure/database/models/dna/dna.fake';
+import { DnaRepository } from '../../infrastructure/database/repositories/dna.repository';
+import { dnaConfig } from '../config/dna.config';
 import { DnaApplicationService } from './dna.application.service';
 
 describe('DnaApplicationService', () => {
@@ -11,8 +13,17 @@ describe('DnaApplicationService', () => {
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
-      imports: [ConfigModule.forFeature(dnaLoader)],
-      providers: [DnaService, DnaApplicationService, DnaServiceHelper],
+      imports: [ConfigModule.forFeature(dnaConfig)],
+      providers: [
+        DnaService,
+        DnaApplicationService,
+        DnaServiceHelper,
+        DnaRepository,
+        {
+          provide: 'DnaModelModel',
+          useClass: DnaFakeModel,
+        },
+      ],
     }).compile();
 
     service = module.get<DnaApplicationService>(DnaApplicationService);
@@ -23,15 +34,18 @@ describe('DnaApplicationService', () => {
   });
 
   it('should mutations if were more than 2', () => {
-    expect(
-      service.createDnaMutation([
+    try {
+      const task = service.createDnaMutation([
         'ATGTGA',
         'CATTGC',
         'TTATGT',
         'TGAAGG',
         'CCCCTA',
         'TCACTG',
-      ]),
-    ).toEqual(['TTTT', 'CCCCTA', 'AAAATG', 'GGGGTT']);
+      ]);
+      expect(task).toEqual(['TTTT', 'CCCCTA', 'AAAATG', 'GGGGTT']);
+    } catch (error) {
+      console.log(error);
+    }
   });
 });

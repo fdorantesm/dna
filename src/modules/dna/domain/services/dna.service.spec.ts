@@ -1,8 +1,13 @@
 import { ConfigModule } from '@nestjs/config';
+import { MongooseModule } from '@nestjs/mongoose';
 import { Test, TestingModule } from '@nestjs/testing';
 
-import dnaLoader from '../../application/config/dna.config';
+import { CoreModule } from '../../../../core/core.module';
+import { dnaConfig } from '../../application/config/dna.config';
 import { DnaService } from '../../domain/services/dna.service';
+import { models } from '../../infrastructure/database/models';
+import { DnaFakeModel } from '../../infrastructure/database/models/dna/dna.fake';
+import { DnaRepository } from '../../infrastructure/database/repositories/dna.repository';
 import { DnaServiceHelper } from '../helpers/dna.helper';
 
 describe('DnaApplicationService', () => {
@@ -10,8 +15,20 @@ describe('DnaApplicationService', () => {
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
-      imports: [ConfigModule.forFeature(dnaLoader)],
-      providers: [DnaService, DnaServiceHelper],
+      imports: [
+        CoreModule,
+        ConfigModule.forFeature(dnaConfig),
+        MongooseModule.forFeature(models),
+      ],
+      providers: [
+        DnaService,
+        DnaServiceHelper,
+        DnaRepository,
+        {
+          provide: 'DnaModelModel',
+          useClass: DnaFakeModel,
+        },
+      ],
     }).compile();
 
     service = module.get<DnaService>(DnaService);
@@ -29,7 +46,7 @@ describe('DnaApplicationService', () => {
       topRightToBottomLeft: ['AAAATG'],
       topToBottom: ['GGGGTT'],
     };
-    expect(service.findMutations(input)).toEqual(output);
+    expect(service.lookupMutations(input)).toEqual(output);
   });
 
   it('should fails without mutations', () => {
@@ -40,7 +57,7 @@ describe('DnaApplicationService', () => {
       topRightToBottomLeft: [],
       topToBottom: [],
     };
-    expect(service.findMutations(input)).toEqual(output);
+    expect(service.lookupMutations(input)).toEqual(output);
   });
 
   it('should returns stats', () => {
@@ -49,5 +66,20 @@ describe('DnaApplicationService', () => {
       count_no_mutation: 100,
       ratio: 0.4,
     });
+  });
+
+  it('should creates a mutation document', async () => {
+    const dna = {
+      sequence: ['ATGTGA', 'CATTGC', 'TTATGT', 'TGAAGG', 'CCCCTA', 'TCACTG'],
+      mutations: ['TTTT', 'CCCCTA', 'AAAATG', 'GGGGTT'],
+      mutationsCount: 4,
+    };
+
+    const task = await service.createDna(dna);
+
+    expect(task).toHaveProperty('uuid');
+    expect(task).toHaveProperty('sequence');
+    expect(task).toHaveProperty('mutations');
+    expect(task).toHaveProperty('mutationsCount');
   });
 });

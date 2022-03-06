@@ -1,7 +1,7 @@
 import { registerAs } from '@nestjs/config';
 import { DnaConfigType } from './dna.type';
 
-export default registerAs(
+export const dnaConfig = registerAs(
   'dna',
   (): DnaConfigType => ({
     chars: [...(process.env.DNA_CHARS || 'ACGT')],

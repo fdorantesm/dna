@@ -4,7 +4,7 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import { MongooseModule } from '@nestjs/mongoose';
 
 import { configOptions } from './config';
-import databaseConfig from './config/database/database.config';
+import { databaseConfig } from './config/database/database.config';
 import { DatabaseFactory } from './config/database/database.factory';
 
 @Module({
