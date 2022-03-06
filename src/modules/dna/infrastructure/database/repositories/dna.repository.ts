@@ -24,8 +24,16 @@ export class DnaRepository {
     };
   }
 
-  public find(
-    filter: FilterQuery<DnaModel>,
+  public find(filter?: FilterQuery<DnaModel>): Promise<DnaModel[]> {
+    return this.dnaModel.find(filter).exec();
+  }
+
+  public countDocuments(filter?: FilterQuery<DnaModel>): Promise<number> {
+    return this.dnaModel.countDocuments(filter).exec();
+  }
+
+  public paginate(
+    filter?: FilterQuery<DnaModel>,
   ): Promise<PaginateResult<DnaModel>> {
     return this.dnaModel.paginate(filter);
   }

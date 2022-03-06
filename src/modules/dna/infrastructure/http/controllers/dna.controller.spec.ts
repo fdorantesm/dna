@@ -32,29 +32,9 @@ describe('DnaController', () => {
     controller = module.get<DnaController>(DnaController);
   });
 
-  it('should be defined', () => {
+  it('should defined methods', () => {
     expect(controller).toBeDefined();
-  });
-
-  it('should returns an array of mutations', async () => {
-    expect(
-      await controller.createDnaMutation({
-        dna: ['ATGTGA', 'CATTGC', 'TTATGT', 'TGAAGG', 'CCCCTA', 'TCACTG'],
-      }),
-    ).toEqual(['TTTT', 'CCCCTA', 'AAAATG', 'GGGGTT']);
-  });
-
-  it('should fails', () => {
-    try {
-      controller.createDnaMutation({
-        dna: ['ATGCGA', 'CAGTGC', 'TTATTT', 'AGACGG', 'GCGTCA', 'TCACTG'],
-      });
-    } catch (error) {
-      expect(error.response.statusCode).toBe(403);
-      expect(error.response.error).toBe('Forbidden');
-      expect(error).toEqual(
-        new ForbiddenException('DNA sequence has not mutations'),
-      );
-    }
+    expect(controller.lookupDna).toBeDefined();
+    expect(controller.getStats).toBeDefined();
   });
 });

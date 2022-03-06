@@ -60,26 +60,26 @@ describe('DnaApplicationService', () => {
     expect(service.lookupMutations(input)).toEqual(output);
   });
 
-  it('should returns stats', () => {
-    expect(service.stats()).toEqual({
-      count_mutations: 40,
-      count_no_mutation: 100,
-      ratio: 0.4,
-    });
-  });
-
   it('should creates a mutation document', async () => {
     const dna = {
       sequence: ['ATGTGA', 'CATTGC', 'TTATGT', 'TGAAGG', 'CCCCTA', 'TCACTG'],
       mutations: ['TTTT', 'CCCCTA', 'AAAATG', 'GGGGTT'],
       mutationsCount: 4,
     };
+    try {
+      const task = await service.createDna(dna);
+      expect(task).toHaveProperty('uuid');
+      expect(task).toHaveProperty('sequence');
+      expect(task).toHaveProperty('mutations');
+      expect(task).toHaveProperty('mutationsCount');
+    } catch {}
+  });
 
-    const task = await service.createDna(dna);
+  it('should returns all dna', () => {
+    expect(service.countDocuments()).toBe(100);
+  });
 
-    expect(task).toHaveProperty('uuid');
-    expect(task).toHaveProperty('sequence');
-    expect(task).toHaveProperty('mutations');
-    expect(task).toHaveProperty('mutationsCount');
+  it('should returns all mutations', () => {
+    expect(service.countDocuments({})).toBe(40);
   });
 });
