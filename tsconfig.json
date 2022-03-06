@@ -16,6 +16,14 @@
     "noImplicitAny": false,
     "strictBindCallApply": false,
     "forceConsistentCasingInFileNames": false,
-    "noFallthroughCasesInSwitch": false
+    "noFallthroughCasesInSwitch": false,
+    "paths": {
+      "@plugins/mongoose-hide-object-id": [
+        "libs/mongoose-hide-object-id/src"
+      ],
+      "@plugins/mongoose-hide-object-id/*": [
+        "libs/mongoose-hide-object-id/src/*"
+      ]
+    }
   }
 }
