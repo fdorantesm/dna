@@ -2,9 +2,9 @@ name: Testing
 
 on:
   push:
-    branches: [ release/**, hotfix/**, bugfix/** ]
+    branches: [ release/**, hotfix/**, bugfix/**, feature/**  ]
   pull_request:
-    branches: [ main, develop, release/**, hotfix/**, bugfix/** ]
+    branches: [ main, develop ]
 
 jobs:
   build:
@@ -21,12 +21,14 @@ jobs:
         uses: actions/setup-node@v2
         with:
           node-version: ${{ matrix.node-version }}
-        env:
-          DNA_CHARS: ${{ secrets.DNA_CHARS }}
-          DNA_MUTATION_THRESHOLD_CHARS_COUNT: ${{ secrets.DNA_MUTATION_THRESHOLD_CHARS_COUNT }}
-          DNA_MUTATION_THRESHOLD_SEQUENCE_LENGTH: ${{ secrets.DNA_MUTATION_THRESHOLD_SEQUENCE_LENGTH }}
-      - name: Testing
+      - name: Build
         run: yarn install
-      - run: yarn build
-      - run: yarn lint
-      - run: yarn test
+        run: yarn build
+      - name: Lint
+        run: yarn lint
+      - name: Test
+        run: yarn test
+        env:
+          DNA_CHARS: ${{ env.DNA_CHARS }}
+          DNA_MUTATION_THRESHOLD_CHARS_COUNT: ${{ env.DNA_MUTATION_THRESHOLD_CHARS_COUNT }}
+          DNA_MUTATION_THRESHOLD_SEQUENCE_LENGTH: ${{ env.DNA_MUTATION_THRESHOLD_SEQUENCE_LENGTH }}
