@@ -1,6 +1,7 @@
 import { ConfigModule } from '@nestjs/config';
 import { Test, TestingModule } from '@nestjs/testing';
-import dnaLoader from '../../application/config/dna.config';
+
+import { dnaConfig } from '../../application/config/dna.config';
 
 import { DnaServiceHelper } from './dna.helper';
 
@@ -9,7 +10,7 @@ describe('DnaServiceHelper', () => {
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
-      imports: [ConfigModule.forFeature(dnaLoader)],
+      imports: [ConfigModule.forFeature(dnaConfig)],
       providers: [DnaServiceHelper],
     }).compile();
 

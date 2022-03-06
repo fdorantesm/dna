@@ -3,7 +3,7 @@ import { AuthMechanism } from 'mongodb';
 
 import { DatabaseConfiguration } from './database.type';
 
-export default registerAs(
+export const databaseConfig = registerAs(
   'database',
   (): DatabaseConfiguration => ({
     host: process.env.DB_HOST,

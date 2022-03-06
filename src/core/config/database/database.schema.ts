@@ -1,6 +1,6 @@
 import * as Joi from 'joi';
 
-export default Joi.object({
+export const databaseSchema = Joi.object({
   DB_HOST: Joi.string().hostname(),
   DB_PORT: Joi.number().port(),
   DB_USERNAME: Joi.string().when('DB_AUTH_MECHANISM', {

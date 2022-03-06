@@ -2,20 +2,31 @@ import { ConfigModule } from '@nestjs/config';
 import { Test, TestingModule } from '@nestjs/testing';
 import { ForbiddenException } from '@nestjs/common';
 
-import dnaLoader from '../../../application/config/dna.config';
+import { dnaConfig } from '../../../application/config/dna.config';
 import { DnaService } from '../../../domain/services/dna.service';
 import { DnaApplicationService } from '../../../application/services/dna.application.service';
 import { DnaServiceHelper } from '../../../domain/helpers/dna.helper';
 import { DnaController } from './dna.controller';
+import { DnaRepository } from '../../database/repositories/dna.repository';
+import { DnaFakeModel } from '../../database/models/dna/dna.fake';
 
 describe('DnaController', () => {
   let controller: DnaController;
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
-      imports: [ConfigModule.forFeature(dnaLoader)],
+      imports: [ConfigModule.forFeature(dnaConfig)],
       controllers: [DnaController],
-      providers: [DnaService, DnaApplicationService, DnaServiceHelper],
+      providers: [
+        DnaService,
+        DnaApplicationService,
+        DnaServiceHelper,
+        DnaRepository,
+        {
+          provide: 'DnaModelModel',
+          useClass: DnaFakeModel,
+        },
+      ],
     }).compile();
 
     controller = module.get<DnaController>(DnaController);
@@ -25,9 +36,9 @@ describe('DnaController', () => {
     expect(controller).toBeDefined();
   });
 
-  it('should returns an array of mutations', () => {
+  it('should returns an array of mutations', async () => {
     expect(
-      controller.createDnaMutation({
+      await controller.createDnaMutation({
         dna: ['ATGTGA', 'CATTGC', 'TTATGT', 'TGAAGG', 'CCCCTA', 'TCACTG'],
       }),
     ).toEqual(['TTTT', 'CCCCTA', 'AAAATG', 'GGGGTT']);
