@@ -9,7 +9,7 @@ import * as mongoose from 'mongoose';
 import { mongooseHideObjectId } from '@plugins/mongoose-hide-object-id';
 import * as mongoosePaginate from 'mongoose-paginate';
 
-import { Json } from '../../../app/types/json.type';
+import { Json } from '../../../../app/types/json.type';
 import { DatabaseConfiguration } from './database.type';
 import { AuthMechanism } from 'mongodb';
 
