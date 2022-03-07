@@ -16,13 +16,19 @@
 4. Run the following command to launch in docker compose.
 
 ```sh
-yarn dev:start up
+yarn dev:start
 ```
 
 - If you need to install module you could use the next command to use yarn inside Docker container:
 
 ```sh
 yarn x yarn add <module>
+```
+
+- You could run commands inside Docker container using x command like the following example:
+
+```sh
+yarn x ls
 ```
 
 ### Sandbox
