@@ -7,7 +7,7 @@ import helmet from 'helmet';
 import expressRateLimit from 'express-rate-limit';
 
 import { AppModule } from './app/app.module';
-import { ServerConfiguration } from './core/config/server/server.type';
+import { ServerConfiguration } from './core/application/config/server/server.type';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);

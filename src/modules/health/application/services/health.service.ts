@@ -2,7 +2,7 @@ import { HttpService } from '@nestjs/axios';
 import { Injectable, Logger } from '@nestjs/common';
 import { Cron } from '@nestjs/schedule';
 
-import { serverConfig } from '../../../../core/config/server/config';
+import { serverConfig } from '../../../../core/application/config/server/config';
 
 @Injectable()
 export class HealthService {
