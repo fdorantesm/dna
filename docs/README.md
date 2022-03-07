@@ -1,4 +1,6 @@
-# Installation
+# Guros
+
+## Installation
 
 ### Requirements
 
@@ -33,14 +35,15 @@ yarn x ls
 
 ### Sandbox
 
-|         |                                 |
-| ------- | ------------------------------- |
-| API Key | 311SXD9-47T4XC9-JB5XZ88-82WCWWW |
+|          |                                 |
+| -------- | ------------------------------- |
+| API Key  | 311SXD9-47T4XC9-JB5XZ88-82WCWWW |
+| Endpoint | https://guros-dna.herokuapp.com |
 
 ```sh
 curl --request POST \
   --url http://localhost:3000/v1/dna/mutations \
-  --header 'Authorization: Api-Key 311SXD9-47T4XC9-JB5XZ88-82WCWWW' \
+  --header 'Authorization: ApiKey 311SXD9-47T4XC9-JB5XZ88-82WCWWW' \
   --header 'Content-Type: application/json' \
   --data '{
 	"dna": [
