@@ -33,9 +33,11 @@ yarn x ls
 
 ### Sandbox
 
-|         |                                 |
-| ------- | ------------------------------- |
-| API Key | 311SXD9-47T4XC9-JB5XZ88-82WCWWW |
+|         |                                      |
+| ------- | ------------------------------------ |
+| API Key | 311SXD9-47T4XC9-JB5XZ88-82WCWWW      |
+| API     | https://guros-dna.herokuapp.com      |
+| API DOC | https://guros-dna.herokuapp.com/docs |
 
 ```sh
 curl --request POST \
@@ -52,4 +54,18 @@ curl --request POST \
 		"TCACTG"
 	]
 }'
+```
+
+### Import and export dotenv files
+
+Export dotenvs
+
+```sh
+yarn env zip guros.zip
+```
+
+Import dotends
+
+```sh
+yarn env unzip guros.zip
 ```

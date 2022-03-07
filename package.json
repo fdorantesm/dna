@@ -24,7 +24,8 @@
     "dev:start": "/bin/bash scripts/compose.sh up",
     "dev:stop": "/bin/bash scripts/compose.sh down",
     "make": "/bin/bash scripts/make.sh",
-    "husky:install": "husky install"
+    "husky:install": "husky install",
+    "env": "/bin/bash scripts/dotenv.sh"
   },
   "dependencies": {
     "@nestjs/axios": "^0.0.6",
@@ -73,6 +74,7 @@
     "@typescript-eslint/parser": "^5.0.0",
     "cross-var": "^1.1.0",
     "dotenv-cli": "^5.0.0",
+    "envpack": "^1.0.19",
     "eslint": "^8.0.1",
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-prettier": "^4.0.0",
