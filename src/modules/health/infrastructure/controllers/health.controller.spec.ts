@@ -1,3 +1,4 @@
+import { HttpService } from '@nestjs/axios';
 import { Test, TestingModule } from '@nestjs/testing';
 
 import { HealthService } from '../../application/services/health.service';
@@ -9,7 +10,17 @@ describe('HealthController', () => {
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
       controllers: [HealthController],
-      providers: [HealthService],
+      providers: [
+        HealthService,
+        {
+          provide: HttpService,
+          useValue: {
+            get(_path: string) {
+              return Promise.resolve();
+            },
+          },
+        },
+      ],
     }).compile();
 
     controller = module.get<HealthController>(HealthController);

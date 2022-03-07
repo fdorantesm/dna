@@ -7,7 +7,7 @@ import { AuthService } from '../../../application/services/auth.service';
 @Injectable()
 export class BearerStrategy extends PassportStrategy(HeaderAPIKeyStrategy) {
   constructor(private authService: AuthService) {
-    super({ header: 'Authorization', prefix: 'Api-Key ' }, false);
+    super({ header: 'Authorization', prefix: 'ApiKey ' }, false);
   }
 
   async validate(apiKey: string) {
