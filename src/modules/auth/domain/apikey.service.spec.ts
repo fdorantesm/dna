@@ -1,7 +1,7 @@
 import { MongooseModule } from '@nestjs/mongoose';
 import { Test, TestingModule } from '@nestjs/testing';
 
-import { CoreModule } from '../../core/core.module';
+import { CoreModule } from '../../../core/core.module';
 import { AuthService } from '../application/services/auth.service';
 import { ApiKeyFakeModel } from '../infraestructure/database/apikeys/apikey.fake';
 import { ApiKeyModel } from '../infraestructure/database/apikeys/apikey.model';

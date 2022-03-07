@@ -1,4 +1,4 @@
-import { Json } from '../../../../app/types/json.type';
+import { Json } from '../../../../../app/types/json.type';
 
 export class ApiKeyFakeModel {
   findOne(_filter: Json) {

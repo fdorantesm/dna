@@ -16,7 +16,7 @@ import {
   ApiSecurity,
 } from '@nestjs/swagger';
 
-import { BearerAuthGuard } from '../../../../../auth/infraestructure/passport/guards/bearer.guard';
+import { BearerAuthGuard } from '../../../../auth/infraestructure/passport/guards/bearer.guard';
 import { Json } from '../../../../../app/types/json.type';
 import { DnaApplicationService } from '../../../application/services/dna.application.service';
 import { CreateDnaDto } from '../dtos/create-dna.dto';

@@ -1,10 +1,10 @@
 import { MongooseModule } from '@nestjs/mongoose';
 import { Test, TestingModule } from '@nestjs/testing';
-import { ApiKeyService } from 'src/auth/domain/apikey.service';
-import { ApiKeyFakeModel } from 'src/auth/infraestructure/database/apikeys/apikey.fake';
-import { ApiKeyModel } from 'src/auth/infraestructure/database/apikeys/apikey.model';
-import { ApiKeyRepository } from 'src/auth/infraestructure/database/apikeys/apikey.repository';
-import { models } from 'src/auth/infraestructure/database/models';
+import { ApiKeyService } from 'src/modules/auth/domain/apikey.service';
+import { ApiKeyFakeModel } from 'src/modules/auth/infraestructure/database/apikeys/apikey.fake';
+import { ApiKeyModel } from 'src/modules/auth/infraestructure/database/apikeys/apikey.model';
+import { ApiKeyRepository } from 'src/modules/auth/infraestructure/database/apikeys/apikey.repository';
+import { models } from 'src/modules/auth/infraestructure/database/models';
 import { CoreModule } from 'src/core/core.module';
 import { AuthService } from './auth.service';
 
